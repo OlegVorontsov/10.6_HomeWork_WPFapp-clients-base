@@ -21,34 +21,62 @@ namespace _10._6_HomeWork_WPFapp_clients_base
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
         public MainWindow()
         {
             InitializeComponent();
-
             postSelector.ItemsSource = new string[] { "Консультант", "Менеджер" };
-            //string Path = "Справочник.txt";
-            //Consultant cons = new Consultant(Path);
+        }
 
-            clientsView.ItemsSource = ClientsList;
+        static private Consultant init()
+        {
+            string Path = "Справочник.txt";
+            Consultant cons = new Consultant(Path);
+            return cons;
         }
 
         private void postChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem = postSelector.SelectedItem.ToString();
+            postInWork.Text = selectedItem;
         }
 
         private void addInfo_Click(object sender, RoutedEventArgs e)
         {
-            ClientsList.Add(new Client
+
+        }
+
+        private void getInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Consultant myConsultant = init();
+            myConsultant.Load();
+            ObservableCollection<Client> ClientsList = myConsultant.getClientsList();
+
+            clientsView.ItemsSource = ClientsList;
+        }
+
+        private void changeInfo_Click(object sender, RoutedEventArgs e)
+        {
+            string check = postInWork.Text;
+
+            if (check == "Консультант")
             {
-                Surname = "Markov",
-                Name = "Oleg",
-                Patronymic = "Sergeevich",
-                PhoneNumber = 79261013691,
-                RangePassport = 4508,
-                NumberPassport = 613675
-            });
+                Consultant myConsultant = init();
+
+                string Result = myConsultant.changeClientsPhoneNumberBySurname(surnameToChange.Text, long.Parse(phonenumberToChange.Text));
+
+                myConsultant.Load();
+
+                ObservableCollection<Client> ClientsList = myConsultant.getClientsList();
+
+                clientsView.ItemsSource = ClientsList;
+                resultOfChange.Text = Result;
+            }
+            else
+            {
+                resultOfChange.Text = "В доступе отказано";
+            }
+
+
         }
     }
 }

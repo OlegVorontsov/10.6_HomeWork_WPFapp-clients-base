@@ -24,7 +24,7 @@
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Top"
                        Margin="10,5,10,10" TextWrapping="Wrap"/>
-            
+
             <ComboBox Grid.Row="0" x:Name="postSelector" SelectionChanged="postChanged"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Bottom"
@@ -37,7 +37,7 @@
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top"
                        Margin="10,5,10,10" TextWrapping="Wrap"/>
-            
+
             <TextBox Grid.Row="1" x:Name="surname"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
@@ -95,6 +95,33 @@
                      TextWrapping="Wrap"  Width="120" />
             <Button Grid.Row="1" x:Name="addInfo" Content="Добавить"
                     HorizontalAlignment="Left" Margin="10" VerticalAlignment="Bottom" FontSize="14" Click="addInfo_Click"/>
+
+            <Button Grid.Row="3" x:Name="getInfo" FontSize="14"
+                Content="Вывести" 
+                    HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Click="getInfo_Click"/>
+
+            <TextBlock Grid.Row="2"
+                HorizontalAlignment="Left" Margin="10"  Text="Введите фамилию клиента для внесения изменений:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="2" x:Name="surnameToChange"
+                HorizontalAlignment="Left" Margin="310,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <TextBlock Grid.Row="2"
+                HorizontalAlignment="Left" Margin="10, 30, 100, 50"  Text="Введите новые данные:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBlock Grid.Row="2"
+                HorizontalAlignment="Left" Margin="200, 30, 100, 50"  Text="Номер телефона:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="2" x:Name="phonenumberToChange"
+                HorizontalAlignment="Left" Margin="310,30,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <Button Grid.Row="2" x:Name="changeInfo" FontSize="14"
+                Content="Изменить" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Bottom" Click="changeInfo_Click"/>
+
+            <TextBox Grid.Row="2" x:Name="resultOfChange"
+                HorizontalAlignment="Left" Margin="310,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+            <TextBox x:Name="postInWork"
+                HorizontalAlignment="Left" Margin="334,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
 
         </Grid>

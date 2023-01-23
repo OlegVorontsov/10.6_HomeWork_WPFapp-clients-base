@@ -32,12 +32,12 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Серия паспорта
         /// </summary>
-        private ushort rangePassport;
+        private string rangePassport;
 
         /// <summary>
         /// Номер паспорта
         /// </summary>
-        private uint numberPassport;
+        private string numberPassport;
         #endregion
 
         #region Свойства
@@ -80,7 +80,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Серия паспорта
         /// </summary>
-        public ushort RangePassport
+        public string RangePassport
         {
             get { return this.rangePassport; }
             set { this.rangePassport = value; }
@@ -89,7 +89,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Номер паспорта
         /// </summary>
-        public uint NumberPassport
+        public string NumberPassport
         {
             get { return this.numberPassport; }
             set { this.numberPassport = value; }
@@ -97,7 +97,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         #endregion
 
         #region Конструктор
-        public Client(string Surname, string Name, string Patronymic, long PhoneNumber, ushort RangePassport, uint NumberPassport)
+        public Client(string Surname, string Name, string Patronymic, long PhoneNumber, string RangePassport, string NumberPassport)
         {
             this.surname = Surname;
             this.name = Name;
