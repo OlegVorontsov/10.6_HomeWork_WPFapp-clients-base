@@ -8,20 +8,15 @@ using System.Threading.Tasks;
 
 namespace _10._6_HomeWork_WPFapp_clients_base
 {
-    class Consultant
+    class Consultant : Worker
     {
-        ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
-
-        private string path;
-
         #region Коструктор
         /// <summary>
-        /// Создание репозитория
+        /// Создание экземпляра Консультанта
         /// </summary>
         /// <param name="Path"></param>
-        public Consultant(string Path)
+        public Consultant(string Path) : base(Path)
         {
-            this.path = Path;
         }
         #endregion
 
@@ -29,9 +24,9 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Загрузка данных о клиентах из файла Справочник в коллекцию
         /// </summary>
-        public void Load()
+        public override void Load()
         {
-            using (StreamReader sr = new StreamReader(this.path))
+            using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
                 {
@@ -55,19 +50,13 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                         Patronymic = args[2],
                         PhoneNumber = long.Parse(args[3]),
                         RangePassport = rangePassportHidden,
-                        NumberPassport = numberPassportHidden
+                        NumberPassport = numberPassportHidden,
+                        DateAndTime = args[6],
+                        WhatChanged = args[7],
+                        WhoChanged = args[8]
                     });
                 }
             }
-        }
-
-        /// <summary>
-        /// Метод возвращает коллекцию Клиентов
-        /// </summary>
-        /// <returns></returns>
-        public ObservableCollection<Client> getClientsList()
-        {
-            return ClientsList;
         }
 
         /// <summary>
@@ -75,13 +64,13 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// </summary>
         /// <param name="SurnameToChangePhoneNumber"></param>
         /// <param name="PhoneNumberToChange"></param>
-        public string changeClientsPhoneNumberBySurname(string SurnameToChangePhoneNumber, long PhoneNumberToChange)
+        public override string changeClientsList(string SurnameToChangePhoneNumber, long PhoneNumberToChange)
         {
             int i = 0;
             bool surnameNotFound = true;
             string result = string.Empty;
 
-            using (StreamReader sr = new StreamReader(this.path))
+            using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
                 {
@@ -96,11 +85,17 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                             Patronymic = args[2],
                             PhoneNumber = long.Parse(args[3]),
                             RangePassport = args[4],
-                            NumberPassport = args[5]
+                            NumberPassport = args[5],
+                            DateAndTime = args[6],
+                            WhatChanged = args[7],
+                            WhoChanged = args[8]
                         });
                     }
                     else
                     {
+                        string nowDate = DateTime.Now.ToShortDateString();
+                        string nowTime = DateTime.Now.ToShortTimeString();
+                        string dateAndTime = $"{nowDate} {nowTime}";
                         ClientsList.Add(new Client
                         {
                             Surname = args[0],
@@ -108,7 +103,10 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                             Patronymic = args[2],
                             PhoneNumber = PhoneNumberToChange,
                             RangePassport = args[4],
-                            NumberPassport = args[5]
+                            NumberPassport = args[5],
+                            DateAndTime = dateAndTime,
+                            WhatChanged = "/н.тел.",
+                            WhoChanged = $"{GetType().Name}"
                         });
                         surnameNotFound = false;
                         result = "Данные изменены";
@@ -120,19 +118,22 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                     result = $"Клиента с фамилией {SurnameToChangePhoneNumber} нет в Справочнике";
                 }
             }
-            File.Delete(this.path);
-            File.Create(this.path).Close();
-            using (StreamWriter sw = new StreamWriter(this.path, true, Encoding.UTF8))
+            File.Delete(path);
+            File.Create(path).Close();
+            using (StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8))
             {
                 for (int j = 0; j < i; j++)
                 {
                     string lineClient = string.Empty;
-                    lineClient = $"{this.ClientsList[j].Surname}#" +
-                                 $"{this.ClientsList[j].Name}#" +
-                                 $"{this.ClientsList[j].Patronymic}#" +
-                                 $"{this.ClientsList[j].PhoneNumber}#" +
-                                 $"{this.ClientsList[j].RangePassport}#" +
-                                 $"{this.ClientsList[j].NumberPassport}#";
+                    lineClient = $"{ClientsList[j].Surname}#" +
+                                 $"{ClientsList[j].Name}#" +
+                                 $"{ClientsList[j].Patronymic}#" +
+                                 $"{ClientsList[j].PhoneNumber}#" +
+                                 $"{ClientsList[j].RangePassport}#" +
+                                 $"{ClientsList[j].NumberPassport}#" +
+                                 $"{ClientsList[j].DateAndTime}#" +
+                                 $"{ClientsList[j].WhatChanged}#" +
+                                 $"{ClientsList[j].WhoChanged}";
                     sw.WriteLine(lineClient);
                 }
             }

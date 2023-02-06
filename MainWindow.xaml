@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_10._6_HomeWork_WPFapp_clients_base"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="1200
+        ">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
 
         <Grid ShowGridLines="True" Grid.Column="1">
@@ -25,7 +26,8 @@
                        VerticalAlignment="Top"
                        Margin="10,5,10,10" TextWrapping="Wrap"/>
 
-            <ComboBox Grid.Row="0" x:Name="postSelector" SelectionChanged="postChanged"
+            <ComboBox Grid.Row="0" x:Name="postSelector" SelectedValuePath="postSelected"
+                      SelectionChanged="postChanged"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Bottom"
                       Margin="10,10,10,10"
@@ -49,9 +51,9 @@
                        Margin="180,5,10,10" TextWrapping="Wrap"/>
 
             <TextBox Grid.Row="1" x:Name="name"
-                     HorizontalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="180,25,10,10"
                      VerticalAlignment="Top"
-                     Margin="10,25,10,10"
                      TextWrapping="Wrap"  Width="120" />
 
             <TextBlock Grid.Row="1" Text="Отчество:"
@@ -59,9 +61,9 @@
                        Margin="350,5,10,10" TextWrapping="Wrap"/>
 
             <TextBox Grid.Row="1" x:Name="patronymic"
-                     HorizontalAlignment="Right"
+                     HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Margin="10,25,10,10"
+                     Margin="350,25,10,10"
                      TextWrapping="Wrap"  Width="120" />
 
             <TextBlock Grid.Row="1" Text="Номер телефона:"
@@ -121,36 +123,26 @@
             <TextBox Grid.Row="2" x:Name="resultOfChange"
                 HorizontalAlignment="Left" Margin="310,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
             <TextBox x:Name="postInWork"
-                HorizontalAlignment="Left" Margin="334,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                HorizontalAlignment="Left" Margin="400,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
 
         </Grid>
-        <ListBox x:Name="clientsView" Margin="10" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
-                        <TextBlock FontSize="20">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0} {1} {2}">
-                                    <Binding Path="Surname" />
-                                    <Binding Path="Name" />
-                                    <Binding Path="Patronymic" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                        <TextBlock Text="{Binding StringFormat=Номер телефона: {0}, Path = PhoneNumber}" Foreground="Gray" FontSize="15"/>
-                        <TextBlock Foreground="Gray" FontSize="15">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}Паспорт: серия {0} номер {1}">
-                                    <Binding Path="RangePassport" />
-                                    <Binding Path="NumberPassport" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView x:Name="lstClients" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding Surname}"/>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding Patronymic}"/>
+                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Серия паспорта" DisplayMemberBinding="{Binding RangePassport}"/>
+                    <GridViewColumn Header="Номер паспорта" DisplayMemberBinding="{Binding NumberPassport}"/>
+                    <GridViewColumn Header="Дата/время записи" DisplayMemberBinding="{Binding DateAndTime}"/>
+                    <GridViewColumn Header="Что изменено" DisplayMemberBinding="{Binding WhatChanged}"/>
+                    <GridViewColumn Header="Кто изменил" DisplayMemberBinding="{Binding WhoChanged}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
 
     </Grid>
 </Window>

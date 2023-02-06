@@ -38,6 +38,21 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// Номер паспорта
         /// </summary>
         private string numberPassport;
+
+        /// <summary>
+        /// Дата и время записи
+        /// </summary>
+        private string dateAndTime;
+
+        /// <summary>
+        /// Что изменилось в записи
+        /// </summary>
+        private string whatChanged;
+
+        /// <summary>
+        /// Кто изменил запись
+        /// </summary>
+        private string whoChanged;
         #endregion
 
         #region Свойства
@@ -94,10 +109,45 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             get { return this.numberPassport; }
             set { this.numberPassport = value; }
         }
+
+        /// <summary>
+        /// Дата и время записи
+        /// </summary>
+        public string DateAndTime
+        {
+            get { return this.dateAndTime; }
+            set { this.dateAndTime = value; }
+        }
+
+        /// <summary>
+        /// Что изменилось в записи
+        /// </summary>
+        public string WhatChanged
+        {
+            get { return this.whatChanged; }
+            set { this.whatChanged = value; }
+        }
+
+        /// <summary>
+        /// Кто изменил запись
+        /// </summary>
+        public string WhoChanged
+        {
+            get { return this.whoChanged; }
+            set { this.whoChanged = value; }
+        }
         #endregion
 
         #region Конструктор
-        public Client(string Surname, string Name, string Patronymic, long PhoneNumber, string RangePassport, string NumberPassport)
+        public Client(string Surname,
+                      string Name,
+                      string Patronymic,
+                      long PhoneNumber,
+                      string RangePassport,
+                      string NumberPassport,
+                      string DateAndTime,
+                      string WhatChanged,
+                      string WhoChanged)
         {
             this.surname = Surname;
             this.name = Name;
@@ -105,6 +155,9 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             this.phoneNumber = PhoneNumber;
             this.rangePassport = RangePassport;
             this.numberPassport = NumberPassport;
+            this.dateAndTime = DateAndTime;
+            this.whatChanged = WhatChanged;
+            this.whoChanged = WhoChanged;
         }
         #endregion
     }

@@ -21,6 +21,8 @@ namespace _10._6_HomeWork_WPFapp_clients_base
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,10 +36,21 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             return cons;
         }
 
+        private void getInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Consultant myConsultant = init();
+            myConsultant.Load();
+            ClientsList = myConsultant.getClientsList();
+            lstClients.ItemsSource = ClientsList;
+        }
+
+
+
+
         private void postChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedItem = postSelector.SelectedItem.ToString();
-            postInWork.Text = selectedItem;
+            //string selectedItem = postSelector.SelectedValue.ToString();
+            //postInWork.Text = selectedItem;
         }
 
         private void addInfo_Click(object sender, RoutedEventArgs e)
@@ -45,38 +58,30 @@ namespace _10._6_HomeWork_WPFapp_clients_base
 
         }
 
-        private void getInfo_Click(object sender, RoutedEventArgs e)
-        {
-            Consultant myConsultant = init();
-            myConsultant.Load();
-            ObservableCollection<Client> ClientsList = myConsultant.getClientsList();
-
-            clientsView.ItemsSource = ClientsList;
-        }
-
         private void changeInfo_Click(object sender, RoutedEventArgs e)
         {
-            string check = postInWork.Text;
+            //string check = postSelector.SelectedValue.ToString();
+            //string check = ((ComboBoxItem)postSelector.SelectedItem).Content.ToString();
 
-            if (check == "Консультант")
-            {
-                Consultant myConsultant = init();
+            //if (check == "Консультант")
+            //{
+            //    Consultant myConsultant = init();
 
-                string Result = myConsultant.changeClientsPhoneNumberBySurname(surnameToChange.Text, long.Parse(phonenumberToChange.Text));
+            //    string Result = myConsultant.changeClientsPhoneNumberBySurname(surnameToChange.Text, long.Parse(phonenumberToChange.Text));
 
-                myConsultant.Load();
+            //    myConsultant.Load();
 
-                ObservableCollection<Client> ClientsList = myConsultant.getClientsList();
+            //    ObservableCollection<Client> ClientsList = myConsultant.getClientsList();
 
-                clientsView.ItemsSource = ClientsList;
-                resultOfChange.Text = Result;
-            }
-            else
-            {
-                resultOfChange.Text = "В доступе отказано";
-            }
-
-
+            //    clientsView.ItemsSource = ClientsList;
+            //    resultOfChange.Text = Result;
+            //}
+            //else
+            //{
+            //    resultOfChange.Text = "В доступе отказано";
+            //}
         }
+
+
     }
 }
