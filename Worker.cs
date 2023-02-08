@@ -11,6 +11,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
     class Worker
     {
         protected static ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
+        protected static FileOperator FileOper;
         protected static string path;
 
         #region Конструктор
@@ -21,6 +22,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         public Worker(string Path)
         {
             path = Path;
+            FileOper = new FileOperator(path);
         }
         #endregion
 
@@ -30,15 +32,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// </summary>
         public virtual void Load()
         {
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string[] args = sr.ReadLine().Split('#');
-
-                    ClientsList.Add(new Client(args[0], args[1], args[2], long.Parse(args[3]), args[4], args[5], args[6], args[7], args[8]));
-                }
-            }
+            ClientsList = FileOper.Load();
         }
 
         /// <summary>

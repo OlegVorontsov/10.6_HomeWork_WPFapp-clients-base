@@ -21,7 +21,10 @@ namespace _10._6_HomeWork_WPFapp_clients_base
     /// </summary>
     public partial class MainWindow : Window
     {
+        static string Path = "Справочник.txt";
+        static Worker myWorker = new Worker(Path);
         ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
+        static string postSelected = string.Empty;
 
         public MainWindow()
         {
@@ -29,29 +32,36 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             postSelector.ItemsSource = new string[] { "Консультант", "Менеджер" };
         }
 
-        static private Consultant init()
+        static private Worker Init()
         {
-            string Path = "Справочник.txt";
-            Consultant cons = new Consultant(Path);
-            return cons;
+            Worker SelectedWorker = new Worker(Path);
+
+            if (postSelected == "Консультант")
+                SelectedWorker = new Consultant(Path);
+            else if (postSelected == "Менеджер")
+                SelectedWorker = new Manager(Path);
+            return SelectedWorker;
         }
 
         private void getInfo_Click(object sender, RoutedEventArgs e)
         {
-            Consultant myConsultant = init();
-            myConsultant.Load();
-            ClientsList = myConsultant.getClientsList();
+            myWorker = Init();
+            myWorker.Load();
+            ClientsList = myWorker.getClientsList();
             lstClients.ItemsSource = ClientsList;
         }
 
-
-
-
         private void postChanged(object sender, SelectionChangedEventArgs e)
         {
-            //string selectedItem = postSelector.SelectedValue.ToString();
-            //postInWork.Text = selectedItem;
+            postSelected = postSelector.SelectedValue.ToString();
+            postInWork.Text = postSelected;
         }
+
+
+
+
+
+
 
         private void addInfo_Click(object sender, RoutedEventArgs e)
         {

@@ -26,7 +26,7 @@
                        VerticalAlignment="Top"
                        Margin="10,5,10,10" TextWrapping="Wrap"/>
 
-            <ComboBox Grid.Row="0" x:Name="postSelector" SelectedValuePath="postSelected"
+            <ComboBox Grid.Row="0" x:Name="postSelector"
                       SelectionChanged="postChanged"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Bottom"

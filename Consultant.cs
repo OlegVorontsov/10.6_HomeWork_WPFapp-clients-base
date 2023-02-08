@@ -26,37 +26,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// </summary>
         public override void Load()
         {
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string[] args = sr.ReadLine().Split('#');
-                    string rangePassportHidden = string.Empty;
-                    string numberPassportHidden = string.Empty;
-
-                    foreach (var item in args[4])
-                    {
-                        rangePassportHidden += "*";
-                    }
-                    foreach (var item in args[5])
-                    {
-                        numberPassportHidden += "*";
-                    }
-
-                    ClientsList.Add(new Client
-                    {
-                        Surname = args[0],
-                        Name = args[1],
-                        Patronymic = args[2],
-                        PhoneNumber = long.Parse(args[3]),
-                        RangePassport = rangePassportHidden,
-                        NumberPassport = numberPassportHidden,
-                        DateAndTime = args[6],
-                        WhatChanged = args[7],
-                        WhoChanged = args[8]
-                    });
-                }
-            }
+            ClientsList = FileOper.LoadHiddenPassport();
         }
 
         /// <summary>
