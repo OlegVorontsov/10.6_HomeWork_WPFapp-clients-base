@@ -102,6 +102,9 @@
                 Content="Вывести" 
                     HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Click="getInfo_Click"/>
 
+            <TextBox Grid.Row="3" x:Name="resultOfGettingData"
+                HorizontalAlignment="Left" Margin="200,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
             <TextBlock Grid.Row="2"
                 HorizontalAlignment="Left" Margin="10"  Text="Введите фамилию клиента для внесения изменений:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
@@ -121,10 +124,7 @@
                 Content="Изменить" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Bottom" Click="changeInfo_Click"/>
 
             <TextBox Grid.Row="2" x:Name="resultOfChange"
-                HorizontalAlignment="Left" Margin="310,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
-            <TextBox x:Name="postInWork"
-                HorizontalAlignment="Left" Margin="400,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
+                HorizontalAlignment="Left" Margin="200,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
 
         </Grid>
         <ListView x:Name="lstClients" Margin="10">

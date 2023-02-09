@@ -31,7 +31,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             InitializeComponent();
             postSelector.ItemsSource = new string[] { "Консультант", "Менеджер" };
         }
-
+        //инициализация сотрудника
         static private Worker Init()
         {
             Worker SelectedWorker = new Worker(Path);
@@ -42,19 +42,36 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                 SelectedWorker = new Manager(Path);
             return SelectedWorker;
         }
-
+        //вывод информации о клиентах
         private void getInfo_Click(object sender, RoutedEventArgs e)
         {
-            myWorker = Init();
-            myWorker.Load();
+            string result = myWorker.Load();
             ClientsList = myWorker.getClientsList();
             lstClients.ItemsSource = ClientsList;
+            resultOfGettingData.Text = result;
         }
-
+        //отображение о том, кто сейчас работает
         private void postChanged(object sender, SelectionChangedEventArgs e)
         {
             postSelected = postSelector.SelectedValue.ToString();
-            postInWork.Text = postSelected;
+            myWorker = Init();
+        }
+
+        private void changeInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (postSelected == "Консультант")
+            {
+                string Result = myWorker.changeClientsList(surnameToChange.Text, long.Parse(phonenumberToChange.Text), postSelected);
+
+                ClientsList = myWorker.getClientsList();
+
+                lstClients.ItemsSource = ClientsList;
+                resultOfChange.Text = Result;
+            }
+            else
+            {
+                resultOfChange.Text = "В доступе отказано";
+            }
         }
 
 
@@ -68,29 +85,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
 
         }
 
-        private void changeInfo_Click(object sender, RoutedEventArgs e)
-        {
-            //string check = postSelector.SelectedValue.ToString();
-            //string check = ((ComboBoxItem)postSelector.SelectedItem).Content.ToString();
-
-            //if (check == "Консультант")
-            //{
-            //    Consultant myConsultant = init();
-
-            //    string Result = myConsultant.changeClientsPhoneNumberBySurname(surnameToChange.Text, long.Parse(phonenumberToChange.Text));
-
-            //    myConsultant.Load();
-
-            //    ObservableCollection<Client> ClientsList = myConsultant.getClientsList();
-
-            //    clientsView.ItemsSource = ClientsList;
-            //    resultOfChange.Text = Result;
-            //}
-            //else
-            //{
-            //    resultOfChange.Text = "В доступе отказано";
-            //}
-        }
+        
 
 
     }

@@ -20,8 +20,13 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         }
         #endregion
 
+        /// <summary>
+        /// Метод возвращает полную информацию о клиентах
+        /// </summary>
+        /// <returns></returns>
         public ObservableCollection<Client> Load()
         {
+            Base.Clear();
             using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
@@ -34,8 +39,13 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             return Base;
         }
 
+        /// <summary>
+        /// Метод возвращает информацию о клиентах со скрытыми данными о паспорте
+        /// </summary>
+        /// <returns></returns>
         public ObservableCollection<Client> LoadHiddenPassport()
         {
+            Base.Clear();
             using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
@@ -68,6 +78,88 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                 }
             }
             return Base;
+        }
+
+        /// <summary>
+        /// Метод изменяет номер телефона по фамилии клиента
+        /// </summary>
+        /// <param name="SurnameToChangePhoneNumber"></param>
+        /// <param name="PhoneNumberToChange"></param>
+        /// <returns></returns>
+        public string changeClientsList(string SurnameToChangePhoneNumber, long PhoneNumberToChange, string Post)
+        {
+            int i = 0;
+            bool surnameNotFound = true;
+            string result = string.Empty;
+            Base.Clear();
+            using (StreamReader sr = new StreamReader(path))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string[] args = sr.ReadLine().Split('#');
+
+                    if (args[0] != SurnameToChangePhoneNumber)
+                    {
+                        Base.Add(new Client
+                        {
+                            Surname = args[0],
+                            Name = args[1],
+                            Patronymic = args[2],
+                            PhoneNumber = long.Parse(args[3]),
+                            RangePassport = args[4],
+                            NumberPassport = args[5],
+                            DateAndTime = args[6],
+                            WhatChanged = args[7],
+                            WhoChanged = args[8]
+                        });
+                    }
+                    else
+                    {
+                        string nowDate = DateTime.Now.ToShortDateString();
+                        string nowTime = DateTime.Now.ToShortTimeString();
+                        string dateAndTime = $"{nowDate} {nowTime}";
+                        Base.Add(new Client
+                        {
+                            Surname = args[0],
+                            Name = args[1],
+                            Patronymic = args[2],
+                            PhoneNumber = PhoneNumberToChange,
+                            RangePassport = args[4],
+                            NumberPassport = args[5],
+                            DateAndTime = dateAndTime,
+                            WhatChanged = "/н.тел.",
+                            WhoChanged = Post
+                        });
+                        surnameNotFound = false;
+                        result = "Данные изменены";
+                    }
+                    i++;
+                }
+                if (surnameNotFound)
+                {
+                    result = $"Клиента с фамилией {SurnameToChangePhoneNumber} нет в Базе";
+                }
+            }
+            File.Delete(path);
+            File.Create(path).Close();
+            using (StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8))
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    string lineClient = string.Empty;
+                    lineClient = $"{Base[j].Surname}#" +
+                                 $"{Base[j].Name}#" +
+                                 $"{Base[j].Patronymic}#" +
+                                 $"{Base[j].PhoneNumber}#" +
+                                 $"{Base[j].RangePassport}#" +
+                                 $"{Base[j].NumberPassport}#" +
+                                 $"{Base[j].DateAndTime}#" +
+                                 $"{Base[j].WhatChanged}#" +
+                                 $"{Base[j].WhoChanged}";
+                    sw.WriteLine(lineClient);
+                }
+            }
+            return result;
         }
     }
 }

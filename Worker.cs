@@ -30,9 +30,10 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Загрузка данных о клиентах из файла Справочник в коллекцию
         /// </summary>
-        public virtual void Load()
+        public virtual string Load()
         {
-            ClientsList = FileOper.Load();
+            string result = "Нужно выбрать должность";
+            return result;
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Метод изменения данных клиента
         /// </summary>
-        public virtual string changeClientsList(string Surname, long PhoneNumber)
+        public virtual string changeClientsList(string Surname, long PhoneNumber, string Post)
         {
             string result = $"У { GetType().Name} нет реализации вызванного метода";
             return result;
