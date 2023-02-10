@@ -26,7 +26,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// </summary>
         public override string Load()
         {
-            ClientsList = FileOper.LoadHiddenPassport();
+            FileOper.LoadHiddenPassport();
             return "Данные выведены";
         }
 
@@ -38,7 +38,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         public override string changeClientsList(string SurnameToChangePhoneNumber, long PhoneNumberToChange, string Post)
         {
             string result = FileOper.changeClientsList(SurnameToChangePhoneNumber, PhoneNumberToChange, Post);
-            ClientsList = FileOper.LoadHiddenPassport();
+            FileOper.LoadHiddenPassport();
             return result;
         }
 

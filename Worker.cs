@@ -10,7 +10,6 @@ namespace _10._6_HomeWork_WPFapp_clients_base
 {
     class Worker
     {
-        protected static ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
         protected static FileOperator FileOper;
         protected static string path;
 
@@ -42,7 +41,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <returns></returns>
         public ObservableCollection<Client> getClientsList()
         {
-            return ClientsList;
+            return FileOper.ClientsBase;
         }
 
         /// <summary>

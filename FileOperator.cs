@@ -10,8 +10,8 @@ namespace _10._6_HomeWork_WPFapp_clients_base
 {
     class FileOperator
     {
-        protected static ObservableCollection<Client> Base = new ObservableCollection<Client>();
         protected static string path;
+        public ObservableCollection<Client> ClientsBase = new ObservableCollection<Client>();
 
         #region Конструктор
         public FileOperator(string Path)
@@ -24,28 +24,27 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// Метод возвращает полную информацию о клиентах
         /// </summary>
         /// <returns></returns>
-        public ObservableCollection<Client> Load()
+        public void Load()
         {
-            Base.Clear();
+            ClientsBase.Clear();
             using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
                 {
                     string[] args = sr.ReadLine().Split('#');
 
-                    Base.Add(new Client(args[0], args[1], args[2], long.Parse(args[3]), args[4], args[5], args[6], args[7], args[8]));
+                    ClientsBase.Add(new Client(args[0], args[1], args[2], long.Parse(args[3]), args[4], args[5], args[6], args[7], args[8]));
                 }
             }
-            return Base;
         }
 
         /// <summary>
         /// Метод возвращает информацию о клиентах со скрытыми данными о паспорте
         /// </summary>
         /// <returns></returns>
-        public ObservableCollection<Client> LoadHiddenPassport()
+        public void LoadHiddenPassport()
         {
-            Base.Clear();
+            ClientsBase.Clear();
             using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
@@ -63,7 +62,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                         numberPassportHidden += "*";
                     }
 
-                    Base.Add(new Client
+                    ClientsBase.Add(new Client
                     {
                         Surname = args[0],
                         Name = args[1],
@@ -77,7 +76,6 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                     });
                 }
             }
-            return Base;
         }
 
         /// <summary>
@@ -91,7 +89,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             int i = 0;
             bool surnameNotFound = true;
             string result = string.Empty;
-            Base.Clear();
+            ClientsBase.Clear();
             using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
@@ -100,7 +98,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
 
                     if (args[0] != SurnameToChangePhoneNumber)
                     {
-                        Base.Add(new Client
+                        ClientsBase.Add(new Client
                         {
                             Surname = args[0],
                             Name = args[1],
@@ -118,7 +116,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                         string nowDate = DateTime.Now.ToShortDateString();
                         string nowTime = DateTime.Now.ToShortTimeString();
                         string dateAndTime = $"{nowDate} {nowTime}";
-                        Base.Add(new Client
+                        ClientsBase.Add(new Client
                         {
                             Surname = args[0],
                             Name = args[1],
@@ -147,15 +145,15 @@ namespace _10._6_HomeWork_WPFapp_clients_base
                 for (int j = 0; j < i; j++)
                 {
                     string lineClient = string.Empty;
-                    lineClient = $"{Base[j].Surname}#" +
-                                 $"{Base[j].Name}#" +
-                                 $"{Base[j].Patronymic}#" +
-                                 $"{Base[j].PhoneNumber}#" +
-                                 $"{Base[j].RangePassport}#" +
-                                 $"{Base[j].NumberPassport}#" +
-                                 $"{Base[j].DateAndTime}#" +
-                                 $"{Base[j].WhatChanged}#" +
-                                 $"{Base[j].WhoChanged}";
+                    lineClient = $"{ClientsBase[j].Surname}#" +
+                                 $"{ClientsBase[j].Name}#" +
+                                 $"{ClientsBase[j].Patronymic}#" +
+                                 $"{ClientsBase[j].PhoneNumber}#" +
+                                 $"{ClientsBase[j].RangePassport}#" +
+                                 $"{ClientsBase[j].NumberPassport}#" +
+                                 $"{ClientsBase[j].DateAndTime}#" +
+                                 $"{ClientsBase[j].WhatChanged}#" +
+                                 $"{ClientsBase[j].WhoChanged}";
                     sw.WriteLine(lineClient);
                 }
             }
