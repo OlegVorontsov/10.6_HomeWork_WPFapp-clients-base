@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _10._6_HomeWork_WPFapp_clients_base
 {
-    public struct Client
+    public struct Client : IComparable<Client>
     {
         #region Поля
         /// <summary>
@@ -160,5 +160,15 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             this.whoChanged = WhoChanged;
         }
         #endregion
+
+        /// <summary>
+        ///Сортировка клиентов по фамилии с помощью интерфейса IComparable
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public int CompareTo(Client other)
+        {
+            return string.Compare(this.surname, other.surname);
+        }
     }
 }

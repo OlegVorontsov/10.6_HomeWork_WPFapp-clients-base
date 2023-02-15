@@ -25,7 +25,6 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         static Worker myWorker = new Worker(Path);
         ObservableCollection<Client> ClientsList = new ObservableCollection<Client>();
         static string postSelected = string.Empty;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -56,37 +55,39 @@ namespace _10._6_HomeWork_WPFapp_clients_base
             postSelected = postSelector.SelectedValue.ToString();
             myWorker = Init();
         }
-
+        //изменение данных о клиенте
         private void changeInfo_Click(object sender, RoutedEventArgs e)
         {
-            if (postSelected == "Консультант")
-            {
-                string Result = myWorker.changeClientsList(surnameToChange.Text, long.Parse(phonenumberToChange.Text), postSelected);
-
-                ClientsList = myWorker.getClientsList();
-
-                lstClients.ItemsSource = ClientsList;
-                resultOfChange.Text = Result;
-            }
-            else
-            {
-                resultOfChange.Text = "В доступе отказано";
-            }
+            string Result = myWorker.changeClientsList(surnameOld.Text,
+                                                       surnameNew.Text,
+                                                       nameToChange.Text,
+                                                       patronymicToChange.Text,
+                                                       long.Parse(phonenumberToChange.Text),
+                                                       rangepassportToChange.Text,
+                                                       numberpassportToChange.Text,
+                                                       postSelected);
+            ClientsList = myWorker.getClientsList();
+            lstClients.ItemsSource = ClientsList;
+            resultOfChange.Text = Result;
         }
-
-
-
-
-
-
-
+        //сортировка коллекции клиентов. Файл с данными о клиентах не меняется
+        private void sortBySurname_Click(object sender, RoutedEventArgs e)
+        {
+            ClientsList = myWorker.sortClientsList();
+            lstClients.ItemsSource = ClientsList;
+        }
+        //добавление данных о клиенте
         private void addInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            string Result = myWorker.putClient(surname.Text,
+                                               name.Text,
+                                               patronymic.Text,
+                                               long.Parse(phoneNumber.Text),
+                                               rangePassport.Text,
+                                               numberPassport.Text);
+            ClientsList = myWorker.getClientsList();
+            lstClients.ItemsSource = ClientsList;
+            resultOfPut.Text = Result;
         }
-
-        
-
-
     }
 }

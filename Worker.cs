@@ -31,8 +31,7 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// </summary>
         public virtual string Load()
         {
-            string result = "Нужно выбрать должность";
-            return result;
+            return "Нужно выбрать должность";
         }
 
         /// <summary>
@@ -47,19 +46,27 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// <summary>
         /// Метод изменения данных клиента
         /// </summary>
-        public virtual string changeClientsList(string Surname, long PhoneNumber, string Post)
+        public virtual string changeClientsList(string SurnameOld, string SurnameNew, string Name, string Patronymic, long PhoneNumber, string RangePassport, string NumberPassport, string Post)
         {
-            string result = $"У { GetType().Name} нет реализации вызванного метода";
-            return result;
+            return "Нужно выбрать должность";
         }
 
         /// <summary>
-        /// Метод добавления данных о клиентах
+        /// Метод добавления данных о клиенте
         /// </summary>
         /// <param name="Path"></param>
-        public virtual void putClients(string Path)
+        public virtual string putClient(string Surname, string Name, string Patronymic, long PhoneNumber, string RangePassport, string NumberPassport)
         {
-            Console.WriteLine($"У {GetType().Name} нет реализации вызванного метода");
+            return $"У {GetType().Name} нет реализации вызванного метода";
+        }
+
+        /// <summary>
+        /// Метод сортировки клиентов
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Client> sortClientsList()
+        {
+            return FileOper.sortClientsList(FileOper.ClientsBase);
         }
         #endregion
     }

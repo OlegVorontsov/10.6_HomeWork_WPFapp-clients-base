@@ -35,9 +35,9 @@ namespace _10._6_HomeWork_WPFapp_clients_base
         /// </summary>
         /// <param name="SurnameToChangePhoneNumber"></param>
         /// <param name="PhoneNumberToChange"></param>
-        public override string changeClientsList(string SurnameToChangePhoneNumber, long PhoneNumberToChange, string Post)
+        public override string changeClientsList(string SurnameToChangePhoneNumber, string SurnameNew, string Name, string Patronymic, long PhoneNumberToChange, string RangePassport, string NumberPassport, string Post)
         {
-            string result = FileOper.changeClientsList(SurnameToChangePhoneNumber, PhoneNumberToChange, Post);
+            string result = FileOper.changeClientsPhoneNumber(SurnameToChangePhoneNumber, PhoneNumberToChange, Post);
             FileOper.LoadHiddenPassport();
             return result;
         }

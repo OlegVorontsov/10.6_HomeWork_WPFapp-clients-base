@@ -95,36 +95,81 @@
                      VerticalAlignment="Center"
                      Margin="350,25,10,10"
                      TextWrapping="Wrap"  Width="120" />
+            
             <Button Grid.Row="1" x:Name="addInfo" Content="Добавить"
                     HorizontalAlignment="Left" Margin="10" VerticalAlignment="Bottom" FontSize="14" Click="addInfo_Click"/>
+
+            <TextBox Grid.Row="1" x:Name="resultOfPut"
+                HorizontalAlignment="Left" Margin="100,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
 
             <Button Grid.Row="3" x:Name="getInfo" FontSize="14"
                 Content="Вывести" 
                     HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Click="getInfo_Click"/>
 
+            <Button Grid.Row="3" x:Name="sortBySurname" FontSize="14"
+                Content="Сортировать" 
+                    HorizontalAlignment="Left" Margin="10, 40, 10, 10"  VerticalAlignment="Top" Click="sortBySurname_Click"/>
+
             <TextBox Grid.Row="3" x:Name="resultOfGettingData"
-                HorizontalAlignment="Left" Margin="200,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                HorizontalAlignment="Left" Margin="100,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
             <TextBlock Grid.Row="2"
-                HorizontalAlignment="Left" Margin="10"  Text="Введите фамилию клиента для внесения изменений:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                HorizontalAlignment="Left" Margin="10"  Text="Фамилия клиента, чьи данные будут изменены:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-            <TextBox Grid.Row="2" x:Name="surnameToChange"
-                HorizontalAlignment="Left" Margin="310,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
-            <TextBlock Grid.Row="2"
-                HorizontalAlignment="Left" Margin="10, 30, 100, 50"  Text="Введите новые данные:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="2" x:Name="surnameOld"
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.Surname, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="280,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
             <TextBlock Grid.Row="2"
-                HorizontalAlignment="Left" Margin="200, 30, 100, 50"  Text="Номер телефона:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                HorizontalAlignment="Left" Margin="430, 10, 10, 10"  Text="Введите новые данные:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBlock Grid.Row="2" Text="Фамилия:"
+                HorizontalAlignment="Left" Margin="10, 35, 100, 50" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="2" x:Name="surnameNew"
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.Surname, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="70,35,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <TextBlock Grid.Row="2" Text="Имя:"
+                HorizontalAlignment="Left" Margin="220, 35, 100, 50" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="2" x:Name="nameToChange"
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.Name, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="260,35,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <TextBlock Grid.Row="2" Text="Отчество:"
+                HorizontalAlignment="Left" Margin="400, 35, 100, 50" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="2" x:Name="patronymicToChange"
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.Patronymic, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="470,35,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <TextBlock Grid.Row="2" Text="Номер телефона:"
+                HorizontalAlignment="Left" Margin="10, 40, 100, 50" TextWrapping="Wrap" VerticalAlignment="Center"/>
 
             <TextBox Grid.Row="2" x:Name="phonenumberToChange"
-                HorizontalAlignment="Left" Margin="310,30,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.PhoneNumber, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="10,50,10,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+
+            <TextBlock Grid.Row="2" Text="Серия паспорта:"
+                HorizontalAlignment="Left" Margin="180, 40, 100, 50" TextWrapping="Wrap" VerticalAlignment="Center"/>
+
+            <TextBox Grid.Row="2" x:Name="rangepassportToChange"
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.RangePassport, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="180,50,10,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
+
+            <TextBlock Grid.Row="2" Text="Номер паспорта:"
+                HorizontalAlignment="Left" Margin="350, 40, 100, 50" TextWrapping="Wrap" VerticalAlignment="Center"/>
+
+            <TextBox Grid.Row="2" x:Name="numberpassportToChange"
+                     Text="{Binding ElementName = lstClients, Path=SelectedItem.NumberPassport, Mode=TwoWay}"
+                HorizontalAlignment="Left" Margin="350,50,10,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
 
             <Button Grid.Row="2" x:Name="changeInfo" FontSize="14"
                 Content="Изменить" HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Bottom" Click="changeInfo_Click"/>
 
             <TextBox Grid.Row="2" x:Name="resultOfChange"
-                HorizontalAlignment="Left" Margin="200,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+                HorizontalAlignment="Left" Margin="100,30,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
 
         </Grid>
         <ListView x:Name="lstClients" Margin="10">
